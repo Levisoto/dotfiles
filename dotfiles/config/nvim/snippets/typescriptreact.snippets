@@ -1,0 +1,57 @@
+
+snippet cl "console.log" w
+console.log($1)
+endsnippet
+
+
+snippet useE "useEffect()" b
+useEffect(() => {
+	$0
+}, [$1])
+endsnippet
+
+snippet rfc "React Functional Component" b
+import { Box, Typography } from "@mui/material/";
+import { styled } from "@mui/material/styles";
+
+/* eslint-disable-next-line */
+export type $1Props = {}
+
+const RootBox = styled(Box)(({ theme }) => ({
+ backgroundColor: theme.palette.primary.light,
+}));
+
+export const ${1:`!v expand('%:t:r')`}=(props:$1Props)=> {
+return (
+<RootBox>
+<Typography>$1</Typography>
+</RootBox>
+);
+}
+
+export default $1;
+endsnippet
+
+snippet rnfc "React Native Functional Component" b
+import React from "react";
+import {StyleSheet, View, Text} from 'react-native';
+
+export type $1Props = {}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 24,
+  },
+});
+
+const ${1:`!v expand('%:t:r')`}=(props:$1Props)=> {
+return (
+<View style={styles.container}>
+<Text>$1</Text>
+</View>
+);
+}
+
+export default $1;
+endsnippet

@@ -1,0 +1,22 @@
+config:
+  backup: true
+  create: true
+  dotpath: dotfiles
+  keepdot: false
+  longkey: false
+dotfiles:
+  f_zshrc:
+    src: zshrc
+    dst: ~/.zshrc
+  d_nvim:
+    src: config/nvim
+    dst: ~/.config/nvim
+  f_tmux.conf:
+    src: tmux.conf
+    dst: ~/.tmux.conf
+profiles:
+  ubuntu-2gb-hel1-1:
+    dotfiles:
+    - f_tmux.conf
+    - f_zshrc
+    - d_nvim
