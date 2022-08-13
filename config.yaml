@@ -14,9 +14,15 @@ dotfiles:
   f_tmux.conf:
     src: tmux.conf
     dst: ~/.tmux.conf
+  d_config_nvim:
+    src: config/nvim
+    dst: ~/.config/nvim
 profiles:
   ubuntu-2gb-hel1-1:
     dotfiles:
     - f_tmux.conf
     - f_zshrc
     - d_nvim
+  huawei:
+    dotfiles:
+    - d_config_nvim
