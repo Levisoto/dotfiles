@@ -64,12 +64,6 @@ map('n', '<leader>m', ':Vista!!<CR>', default_opts)
 map('n', '<leader>tf', ':Telescope file_browser<CR>', default_opts)
 map('n', '<leader>ts', ':Telescope symbols<CR>', default_opts)
 
--- Resize with arrows
-map('n', '<C-Up>', ':resize -2<CR>', default_opts)
-map('n', '<C-Down>', ':resize +2<CR>', default_opts)
-map('n', '<C-Left>', ':vertical resize -2<CR>', default_opts)
-map('n', '<C-Right>', ':vertical resize +2<CR>', default_opts)
-
 -- on hesitation, bring up the panel
 map('n', '<C-s>', ':SidebarNvimToggle<CR>', default_opts)
 

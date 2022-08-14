@@ -4,7 +4,7 @@ require('keymaps')
 
 -- Plugins
 require('plugins/packer')              -- plugin manager
---require('plugins/auto-save')              -- autosave
+require('plugins/auto-save')              -- autosave
 
 --require('plugins/nvim-tree')           -- filebrowser
 require('plugins/neo-tree')           -- filebrowser

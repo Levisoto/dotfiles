@@ -81,6 +81,7 @@ export GOPATH="$HOME/go"
 export GOBIN="$GOPATH/bin"
 export PATH="$GOPATH/bin:$PATH"
 export DOTDROP_AUTOUPDATE="no"
+export PATH="$HOME/.local/bin:$PATH"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8

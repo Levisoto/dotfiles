@@ -51,14 +51,6 @@ return require('packer').startup(function(use)
         "hrsh7th/cmp-nvim-lsp-signature-help",
         "jose-elias-alvarez/null-ls.nvim",
     })
-    use 'folke/lsp-colors.nvim'
- use {
-    'folke/trouble.nvim',
-    requires = {
-        'kyazdani42/nvim-web-devicons',
-    }
-  }
-    use 'kkoomen/vim-doge'
 
     -- Instalation of LSP/Debuggers/Other
     use({
@@ -176,7 +168,7 @@ return require('packer').startup(function(use)
   }
 
   -- autosave
-  -- use "Pocco81/auto-save.nvim"
+  use "Pocco81/auto-save.nvim"
 
   -- terminal
   use "nyngwang/NeoTerm.lua"
