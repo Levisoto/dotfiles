@@ -1,3 +1,6 @@
+local status, feline = pcall(require, "feline")
+if (not status) then return end
+
 local lsp = require('feline.providers.lsp')
 local vi_mode_utils = require('feline.providers.vi_mode')
 
@@ -8,8 +11,8 @@ local force_inactive = {
 }
 
 local components = {
-  active = {{}, {}, {}},
-  inactive = {{}, {}, {}},
+  active = { {}, {}, {} },
+  inactive = { {}, {}, {} },
 }
 
 local colors = {
@@ -72,7 +75,7 @@ local buffer_not_empty = function()
 end
 
 local checkwidth = function()
-  local squeeze_width  = vim.fn.winwidth(0) / 2
+  local squeeze_width = vim.fn.winwidth(0) / 2
   if squeeze_width > 40 then
     return true
   end
@@ -231,19 +234,19 @@ components.active[3][1] = {
 -- fileIcon
 components.active[3][2] = {
   provider = function()
-    local filename = vim.fn.expand('%:t')
+    local filename  = vim.fn.expand('%:t')
     local extension = vim.fn.expand('%:e')
-    local icon  = require'nvim-web-devicons'.get_icon(filename, extension)
+    local icon      = require 'nvim-web-devicons'.get_icon(filename, extension)
     if icon == nil then
       icon = ''
     end
     return icon
   end,
   hl = function()
-    local val = {}
-    local filename = vim.fn.expand('%:t')
-    local extension = vim.fn.expand('%:e')
-    local icon, name  = require'nvim-web-devicons'.get_icon(filename, extension)
+    local val        = {}
+    local filename   = vim.fn.expand('%:t')
+    local extension  = vim.fn.expand('%:e')
+    local icon, name = require 'nvim-web-devicons'.get_icon(filename, extension)
     if icon ~= nil then
       val.fg = vim.fn.synIDattr(vim.fn.hlID(name), 'fg')
     else
@@ -259,10 +262,10 @@ components.active[3][2] = {
 components.active[3][3] = {
   provider = 'file_type',
   hl = function()
-    local val = {}
-    local filename = vim.fn.expand('%:t')
-    local extension = vim.fn.expand('%:e')
-    local icon, name  = require'nvim-web-devicons'.get_icon(filename, extension)
+    local val        = {}
+    local filename   = vim.fn.expand('%:t')
+    local extension  = vim.fn.expand('%:e')
+    local icon, name = require 'nvim-web-devicons'.get_icon(filename, extension)
     if icon ~= nil then
       val.fg = vim.fn.synIDattr(vim.fn.hlID(name), 'fg')
     else
@@ -374,7 +377,7 @@ components.inactive[1][1] = {
   }
 }
 
-require('feline').setup({
+feline.setup({
   theme = colors,
   default_bg = bg,
   default_fg = fg,
