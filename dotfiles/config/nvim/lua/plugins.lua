@@ -8,33 +8,11 @@ vim.cmd [[packadd packer.nvim]]
 
 packer.startup(function(use)
   use 'wbthomason/packer.nvim'
-
-  -- colorschemes
-  --use 'Shatur/neovim-ayu'
-
   use {
     'svrana/neosolarized.nvim',
     requires = { 'tjdevries/colorbuddy.nvim' }
   }
-
-  -- indent line
-  use 'lukas-reineke/indent-blankline.nvim'
-
-  -- statusline
-  -- use {
-  --   'nvim-lualine/lualine.nvim',
-  --   requires = { 'kyazdani42/nvim-web-devicons' , opt = true},
-  -- }
-  -- use ('Iron-E/nvim-highlite')
-  -- use {
-      -- 'feline-nvim/feline.nvim',
-      -- requires = {
-        -- 'gitsigns.nvim',
-        -- 'nvim-web-devicons'
-    -- },
-  -- }
   use 'nvim-lualine/lualine.nvim' -- Statusline
-
   use 'nvim-lua/plenary.nvim' -- Common utilities
   use 'onsails/lspkind-nvim' -- vscode-like pictograms
   use 'hrsh7th/cmp-buffer' -- nvim-cmp source for buffer words
@@ -57,46 +35,15 @@ packer.startup(function(use)
   use 'nvim-telescope/telescope-file-browser.nvim'
   use 'windwp/nvim-autopairs'
   use 'windwp/nvim-ts-autotag'
+  use 'norcalli/nvim-colorizer.lua'
   use 'folke/zen-mode.nvim'
   use({
     "iamcco/markdown-preview.nvim",
     run = function() vim.fn["mkdp#util#install"]() end,
   })
-
   use 'akinsho/nvim-bufferline.lua'
   -- use 'github/copilot.vim'
-  --
-  use 'b3nj5m1n/kommentary'
 
-
+  use 'lewis6991/gitsigns.nvim'
   use 'dinhhuy258/git.nvim' -- For git blame & browse
-    -- git labels
-  use {
-    'lewis6991/gitsigns.nvim',
-    requires = { 'nvim-lua/plenary.nvim' },
-    config = function()
-      require('gitsigns').setup()
-    end
-  }
-
-   -- help for git
-  use 'kdheepak/lazygit.nvim'
-  
-  -- diffview
-  use {
-      'sindrets/diffview.nvim',
-      requires = 'nvim-lua/plenary.nvim'
-  }
-
-  -- movements
-  use {
-    'phaazon/hop.nvim',
-    branch = 'v2', -- optional but strongly recommended
-  }
-  use 'norcalli/nvim-colorizer.lua'
-  require'colorizer'.setup()
-
-    if packer_bootstrap then
-    require('packer').sync()
-  end
 end)

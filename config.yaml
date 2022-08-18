@@ -17,12 +17,16 @@ dotfiles:
   d_config_nvim:
     src: config/nvim
     dst: ~/.config/nvim
+  f_starship.toml:
+    src: config/starship.toml
+    dst: ~/.config/starship.toml
 profiles:
   ubuntu-2gb-hel1-1:
     dotfiles:
     - f_tmux.conf
     - f_zshrc
     - d_nvim
+    - f_starship.toml
   huawei:
     dotfiles:
     - d_config_nvim

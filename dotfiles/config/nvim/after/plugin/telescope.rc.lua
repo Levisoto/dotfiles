@@ -1,9 +1,7 @@
 local status, telescope = pcall(require, "telescope")
 if (not status) then return end
-local sorters = require('telescope.sorters')
 local actions = require('telescope.actions')
 local builtin = require("telescope.builtin")
-local previewers = require("telescope.previewers")
 
 local function telescope_buffer_dir()
   return vim.fn.expand('%:p:h')
@@ -13,12 +11,8 @@ local fb_actions = require "telescope".extensions.file_browser.actions
 
 telescope.setup {
   defaults = {
-    layout_config = {
-      vertical = { width = 0.95, anchor = 2 }
-    },
-    initial_mode = 'insert',
     prompt_prefix = ' ❯',
-    file_ignore_patterns = { '.git/*', 'node_modules', 'env/*' },
+    file_ignore_patterns = { '.git/*', 'node_modules', 'env/*', ".next" },
     mappings = {
       n = {
         ["q"] = actions.close
@@ -28,7 +22,6 @@ telescope.setup {
         ['<C-j>'] = actions.move_selection_next,
         ['<C-k>'] = actions.move_selection_previous,
         ['<Esc>'] = actions.close,
-
       },
     },
   },
