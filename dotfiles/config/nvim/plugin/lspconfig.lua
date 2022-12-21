@@ -8,6 +8,9 @@ local protocol = require('vim.lsp.protocol')
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
+  if client.name == "tsserver" or client.name == "dartls" then
+    client.server_capabilities.document_formatting = false
+  end
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
@@ -25,13 +28,14 @@ local on_attach = function(client, bufnr)
   --buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
 
   -- formatting
-  if client.server_capabilities.documentFormattingProvider then
+  --[[ if client.server_capabilities.documentFormattingProvider then
     vim.api.nvim_create_autocmd("BufWritePre", {
       group = vim.api.nvim_create_augroup("Format", { clear = true }),
       buffer = bufnr,
       callback = function() vim.lsp.buf.formatting_seq_sync() end
     })
-  end
+  end ]]
+  vim.cmd [[ command! Format execute 'lua vim.lsp.buf.format({ async = true})']]
 end
 
 protocol.CompletionItemKind = {
@@ -63,9 +67,14 @@ protocol.CompletionItemKind = {
 }
 
 -- Set up completion using nvim_cmp with LSP source
-local capabilities = require('cmp_nvim_lsp').update_capabilities(
+local capabilities = require('cmp_nvim_lsp').default_capabilities(
   vim.lsp.protocol.make_client_capabilities()
 )
+
+nvim_lsp.dartls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities
+}
 
 nvim_lsp.flow.setup {
   on_attach = on_attach,
@@ -74,9 +83,21 @@ nvim_lsp.flow.setup {
 
 nvim_lsp.tsserver.setup {
   on_attach = on_attach,
-  filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+  filetypes = { "javascript", "typescript", "typescriptreact", "typescript.tsx" },
   cmd = { "typescript-language-server", "--stdio" },
-  capabilities = capabilities
+  --capabilities = capabilities
+}
+
+nvim_lsp.arduino_language_server.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  cmd = {
+    "arduino-language-server",
+    "-cli-config", "~/.arduino15/arduino-cli.yaml",
+    "-fqbn", "esp8266:esp8266:nodemcuv2",
+    "-cli", "arduino-cli",
+    "-clangd", "clangd"
+  },
 }
 
 nvim_lsp.sourcekit.setup {
@@ -103,6 +124,63 @@ nvim_lsp.sumneko_lua.setup {
 
 nvim_lsp.tailwindcss.setup {}
 
+nvim_lsp.omnisharp.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  flags = {
+    debounce_text_changes = 150,
+  },
+  cmd = { "omnisharp", "--languageserver" },
+
+  -- Enables support for reading code style, naming convention and analyzer
+  -- settings from .editorconfig.
+  enable_editorconfig_support = true,
+
+  -- If true, MSBuild project system will only load projects for files that
+  -- were opened in the editor. This setting is useful for big C# codebases
+  -- and allows for faster initialization of code navigation features only
+  -- for projects that are relevant to code that is being edited. With this
+  -- setting enabled OmniSharp may load fewer projects and may thus display
+  -- incomplete reference lists for symbols.
+  enable_ms_build_load_projects_on_demand = false,
+
+  -- Enables support for roslyn analyzers, code fixes and rulesets.
+  enable_roslyn_analyzers = false,
+
+  -- Specifies whether 'using' directives should be grouped and sorted during
+  -- document formatting.
+  organize_imports_on_format = false,
+
+  -- Enables support for showing unimported types and unimported extension
+  -- methods in completion lists. When committed, the appropriate using
+  -- directive will be added at the top of the current file. This option can
+  -- have a negative impact on initial completion responsiveness,
+  -- particularly for the first few completion sessions after opening a
+  -- solution.
+  enable_import_completion = false,
+
+  -- Specifies whether to include preview versions of the .NET SDK when
+  -- determining which version to use for project loading.
+  sdk_include_prereleases = true,
+
+  -- Only run analyzers against open files when 'enableRoslynAnalyzers' is
+  -- true
+  analyze_open_documents_only = false,
+  filetypes = {
+    "cs", "vb", "razor"
+  }
+}
+
+nvim_lsp.jdtls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  cmd = {
+    "jdtls",
+    '-configuration', '/home/leviss/.local/share/nvim/mason/packages/jdtls/config_linux',
+    '-jar', '/home/leviss/.local/share/nvim/mason/packages/jdtls/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar',
+  }
+}
+
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
   underline = true,
@@ -112,7 +190,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 }
 )
 
-local servers = { 'bashls', 'pyright', 'clangd', 'html', 'omnisharp', 'jsonls' } --, 'tsserver'
+local servers = { 'bashls', 'pyright', 'clangd', 'html', 'jsonls', "hls", "rust_analyzer", "lemminx" } --, 'tsserver'
 
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
@@ -136,6 +214,7 @@ vim.diagnostic.config({
     prefix = '●'
   },
   update_in_insert = true,
+  severity_sort = true,
   float = {
     source = "always", -- Or "if_many"
   },

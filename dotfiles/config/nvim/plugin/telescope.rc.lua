@@ -12,7 +12,7 @@ local fb_actions = require "telescope".extensions.file_browser.actions
 telescope.setup {
   defaults = {
     prompt_prefix = ' ❯',
-    file_ignore_patterns = { '.git/*', 'node_modules', 'env/*', ".next" },
+    file_ignore_patterns = { '.git/', 'node_modules/', 'env/*', ".next/", "build/", "dist/", ".stack-work/" },
     mappings = {
       n = {
         ["q"] = actions.close
@@ -24,6 +24,17 @@ telescope.setup {
         ['<Esc>'] = actions.close,
       },
     },
+    vimgrep_arguments = {
+      'rg',
+      '--color=never',
+      '--no-heading',
+      '--with-filename',
+      '--line-number',
+      '--column',
+      '--smart-case',
+      '--no-ignore', -- **This is the added flag**
+      '--hidden' -- **Also this flag. The combination of the two is the same as `-uu`**
+    }
   },
   extensions = {
     file_browser = {
@@ -49,6 +60,10 @@ telescope.setup {
 }
 
 telescope.load_extension("file_browser")
+telescope.load_extension("fzf")
+telescope.load_extension("project")  -- telescope-project.nvim
+telescope.load_extension("repo")
+telescope.load_extension("projects")  -- project.nvim
 
 vim.keymap.set('n', ';f',
   function()

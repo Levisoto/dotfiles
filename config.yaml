@@ -30,3 +30,4 @@ profiles:
   huawei:
     dotfiles:
     - d_config_nvim
+    - d_nvim

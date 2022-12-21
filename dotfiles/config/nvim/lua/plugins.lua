@@ -30,14 +30,15 @@ packer.startup(function(use)
 
 
   -- Color
-  use "NvChad/nvim-colorizer.lua"
+  use "norcalli/nvim-colorizer.lua"
   use "ziontee113/color-picker.nvim"
 
   -- Colorschemes
-  use 'Shatur/neovim-ayu'
+  -- use 'Shatur/neovim-ayu'
+  --use "ellisonleao/gruvbox.nvim"
   -- use "lunarvim/onedarker.nvim"
   -- use "lunarvim/darkplus.nvim"
-  -- use "folke/tokyonight.nvim"
+  use "folke/tokyonight.nvim"
   -- use "lunarvim/colorschemes"
   --[[ use {
     'svrana/neosolarized.nvim',
@@ -46,11 +47,18 @@ packer.startup(function(use)
 
 
   -- Snippet
+  use "hrsh7th/cmp-vsnip"
+  use "hrsh7th/vim-vsnip"
+  use "hrsh7th/vim-vsnip-integ"
+  use "saadparwaiz1/cmp_luasnip"
   use "L3MON4D3/LuaSnip" --snippet engine
   use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
 
   -- Syntax/Treesitter
-  use "nvim-treesitter/nvim-treesitter"
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate'
+  }
   use "JoosepAlviste/nvim-ts-context-commentstring"
   use "p00f/nvim-ts-rainbow"
   use "nvim-treesitter/playground"
@@ -58,10 +66,32 @@ packer.startup(function(use)
   use "nvim-treesitter/nvim-treesitter-textobjects"
 
   -- Fuzzy Finder/Telescope
-  use 'nvim-telescope/telescope.nvim'
-  use 'nvim-telescope/telescope-file-browser.nvim'
-  use "nvim-telescope/telescope-media-files.nvim"
-  use "tom-anders/telescope-vim-bookmarks.nvim"
+  use {
+    'nvim-telescope/telescope.nvim',
+    wants = {
+      "plenary.nvim",
+      "popup.nvim",
+      "telescope-fzf-native.nvim",
+      "telescope-project.nvim",
+      "telescope-repo.nvim",
+      "telescope-file-browser.nvim",
+      "project.nvim",
+    },
+    requires = {
+      'nvim-telescope/telescope-file-browser.nvim',
+      "nvim-telescope/telescope-media-files.nvim",
+      "tom-anders/telescope-vim-bookmarks.nvim",
+      { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+      "nvim-telescope/telescope-project.nvim",
+      "cljoly/telescope-repo.nvim",
+      {
+        "ahmedkhalf/project.nvim",
+        config = function()
+          require("project_nvim").setup {}
+        end,
+      },
+    }
+  }
 
 
 
@@ -78,14 +108,19 @@ packer.startup(function(use)
   -- Icon
   use "kyazdani42/nvim-web-devicons"
 
-  -- Tabline
-  -- use "akinsho/bufferline.nvim"
+  --Tabline
+  use "akinsho/bufferline.nvim"
   -- use "tiagovla/scope.nvim"
 
   -- Git
   use 'lewis6991/gitsigns.nvim'
   use 'dinhhuy258/git.nvim' -- For git blame & browse
 
+  -- Flutter
+  use { 'akinsho/flutter-tools.nvim', requires = 'nvim-lua/plenary.nvim' }
+
+  -- Java
+  use 'mfussenegger/nvim-jdtls'
 
   -- Markdown
   --[[ use {
