@@ -66,6 +66,15 @@ protocol.CompletionItemKind = {
   '', -- TypeParameter
 }
 
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+  underline = true,
+  update_in_insert = false,
+  virtual_text = { spacing = 4, prefix = "●" },
+  severity_sort = true,
+}
+)
+
 -- Set up completion using nvim_cmp with LSP source
 local capabilities = require('cmp_nvim_lsp').default_capabilities(
   vim.lsp.protocol.make_client_capabilities()
@@ -177,18 +186,18 @@ nvim_lsp.jdtls.setup {
   cmd = {
     "jdtls",
     '-configuration', '/home/leviss/.local/share/nvim/mason/packages/jdtls/config_linux',
-    '-jar', '/home/leviss/.local/share/nvim/mason/packages/jdtls/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar',
+    '-jar',
+    '/home/leviss/.local/share/nvim/mason/packages/jdtls/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar',
   }
 }
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-  underline = true,
-  update_in_insert = false,
-  virtual_text = { spacing = 4, prefix = "●" },
-  severity_sort = true,
+nvim_lsp.gopls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  cmd = {
+    "gopls", "serve"
+  }
 }
-)
 
 local servers = { 'bashls', 'pyright', 'clangd', 'html', 'jsonls', "hls", "rust_analyzer", "lemminx" } --, 'tsserver'
 

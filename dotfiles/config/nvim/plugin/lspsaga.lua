@@ -17,3 +17,6 @@ vim.keymap.set('n', 'gr', '<Cmd>Lspsaga rename<CR>', opts)
 vim.keymap.set('n', 'cd', '<Cmd>Lspsaga show_line_diagnostics<CR>', opts)
 vim.keymap.set('n', 'cc', '<Cmd>Lspsaga show_cursor_diagnostics<CR>', opts)
 vim.keymap.set('n', 'ca', '<Cmd>Lspsaga code_action<CR>', opts)
+vim.keymap.set('n', '[e', '<Cmd>Lspsaga diagnostic_jump_prev<CR>', opts)
+vim.keymap.set('n', ']e', '<Cmd>Lspsaga diagnostic_jump_next<CR>', opts)
+
