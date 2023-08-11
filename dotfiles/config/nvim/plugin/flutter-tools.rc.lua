@@ -1,1 +1,6 @@
-require("flutter-tools").setup{} -- use defaults
+local status, fluttertools = pcall(require, "flutter-tools")
+if not status then
+	return
+end
+
+fluttertools.setup({}) -- use defaults

@@ -79,6 +79,11 @@ _G.packer_plugins = {
     path = "/home/leviss/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
+  ["bracey.vim"] = {
+    loaded = true,
+    path = "/home/leviss/.local/share/nvim/site/pack/packer/start/bracey.vim",
+    url = "https://github.com/turbio/bracey.vim"
+  },
   ["bufferline.nvim"] = {
     loaded = true,
     path = "/home/leviss/.local/share/nvim/site/pack/packer/start/bufferline.nvim",
@@ -109,10 +114,10 @@ _G.packer_plugins = {
     path = "/home/leviss/.local/share/nvim/site/pack/packer/start/color-picker.nvim",
     url = "https://github.com/ziontee113/color-picker.nvim"
   },
-  ["flutter-tools.nvim"] = {
+  ["colorbuddy.nvim"] = {
     loaded = true,
-    path = "/home/leviss/.local/share/nvim/site/pack/packer/start/flutter-tools.nvim",
-    url = "https://github.com/akinsho/flutter-tools.nvim"
+    path = "/home/leviss/.local/share/nvim/site/pack/packer/start/colorbuddy.nvim",
+    url = "https://github.com/tjdevries/colorbuddy.nvim"
   },
   ["friendly-snippets"] = {
     loaded = true,
@@ -159,6 +164,11 @@ _G.packer_plugins = {
     path = "/home/leviss/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
   },
+  ["neosolarized.nvim"] = {
+    loaded = true,
+    path = "/home/leviss/.local/share/nvim/site/pack/packer/start/neosolarized.nvim",
+    url = "https://github.com/svrana/neosolarized.nvim"
+  },
   ["null-ls.nvim"] = {
     loaded = true,
     path = "/home/leviss/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
@@ -194,11 +204,6 @@ _G.packer_plugins = {
     path = "/home/leviss/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
-  ["nvim-treesitter-textobjects"] = {
-    loaded = true,
-    path = "/home/leviss/.local/share/nvim/site/pack/packer/start/nvim-treesitter-textobjects",
-    url = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
-  },
   ["nvim-ts-autotag"] = {
     loaded = true,
     path = "/home/leviss/.local/share/nvim/site/pack/packer/start/nvim-ts-autotag",
@@ -223,11 +228,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/leviss/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
-  },
-  playground = {
-    loaded = true,
-    path = "/home/leviss/.local/share/nvim/site/pack/packer/start/playground",
-    url = "https://github.com/nvim-treesitter/playground"
   },
   ["plenary.nvim"] = {
     loaded = true,

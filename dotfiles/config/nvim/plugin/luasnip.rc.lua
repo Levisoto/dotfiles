@@ -1,10 +1,16 @@
 local status, luasnip = pcall(require, "luasnip")
-if (not status) then return end
+if not status then
+	return
+end
 
 local types = require("luasnip.util.types")
 
+require("luasnip.loaders.from_vscode").load({
+  exclude = { "javascript" },
+})
+
 luasnip.setup({
-  history = true,
+	history = true,
 	-- Update more often, :h events for more info.
 	update_events = "TextChanged,TextChangedI",
 	-- Snippets aren't automatically removed if their text is deleted.
@@ -41,21 +47,21 @@ luasnip.setup({
 -- <c-k> is my expasion key
 -- this eill expand the curreent item or jump to the next item eithin the snippet
 vim.keymap.set({ "i", "s" }, "<c-k>", function()
-  if luasnip.expand_or_jumpable() then
-    luasnip.expand_or_jump()
-  end
+	if luasnip.expand_or_jumpable() then
+		luasnip.expand_or_jump()
+	end
 end, { silent = true })
 
 vim.keymap.set({ "i", "s" }, "<c-j>", function()
-  if luasnip.jumpable(-1) then
-    luasnip.jump(-1)
-  end
+	if luasnip.jumpable(-1) then
+		luasnip.jump(-1)
+	end
 end, { silent = true })
 
 vim.keymap.set("i", "<c-l>", function()
-  if luasnip.choice_active() then
-    luasnip.change_choice(1)
-  end
+	if luasnip.choice_active() then
+		luasnip.change_choice(1)
+	end
 end)
 
 -- shortcout to source my luasnips file again , which will reas my snippets

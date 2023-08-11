@@ -12,7 +12,7 @@ local fb_actions = require "telescope".extensions.file_browser.actions
 telescope.setup {
   defaults = {
     prompt_prefix = ' ❯',
-    file_ignore_patterns = { '.git/', 'node_modules/', 'env/*', ".next/", "build/", "dist/", ".stack-work/" },
+    file_ignore_patterns = { '.git/', 'node_modules/', 'env/*', ".next/", "build/", "dist/", ".stack-work/", ".gradle/", "bin/" },
     mappings = {
       n = {
         ["q"] = actions.close

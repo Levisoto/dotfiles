@@ -1,3 +1,6 @@
 .env
+.venv/
+dotdrop.sh
 dotfiles/config/swaylock/screen.jpg
 dotfiles/config/swaylock/logo-ed_screen.png
+dotfiles/config/nvim/snippets/
